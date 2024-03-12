@@ -15,7 +15,11 @@ class Sala:
 
     
     def ingresar_alumno(self, alumno):
-        if alumno.nombre in
+        if alumno.nombre in self.lista_alumnos and alumno.numero_alumno in self.lista_alumnos:
+            print("{} {} ha ingresado a la Sala {} - {}".format(alumno.nombre, alumno.apellido, self.numero_sala, self.sigla))
+        else:
+            print("{} {} se ha intentado colar a la Sala {} - {}".format(alumno.nombre, alumno.apellido, self.numero_sala, self.sigla))
+        
 if __name__ == "__main__":
     javier = Alumno("Javier", "Gomez", "18639942")
     josefa = Alumno("Josefa", "Paz", "16645578")
