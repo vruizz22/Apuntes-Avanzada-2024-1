@@ -1,5 +1,7 @@
-# Apuntes-Avanzada-2024-1 xd
+# Apuntes-Avanzada-2024-1
 
-## [Clase 1](./Clases/Clase%201.md)
-### Ejericios clase 1 [Ejercicios](./Ejercicios/Semana%201/1.py)
+## [Clases](./Clases/Clases.ipynb)
 
+### Ejericios Semana 0 [Ejercicios](./Ejercicios/Semana-0/)
+
+### Ejericios Semana 1 [Ejercicios](./Ejercicios/Semana-1/)
