@@ -5,4 +5,6 @@
 
 
 if __name__ == "__main__":
-    print("xd")
+    lista = [[0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [1, 1, 1, 0]]
+    print([sum(sublista) for sublista in lista])
+    
