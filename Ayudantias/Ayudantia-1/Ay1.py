@@ -48,12 +48,12 @@ class DCChrome:
             print("4. ->")
             print("5. <-")
             print("6. Salir")
+            
             if sitio_anterior != -1:
                 print("7. Volver al sitio")
             nro = input("Elija una opción: ")
             print()
 
-            #completado
             if nro == 1:
                 if self.back_stack:
                     nuevo_sitio = self.back_stack.pop()
