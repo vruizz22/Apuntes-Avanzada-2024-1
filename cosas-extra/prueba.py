@@ -20,7 +20,7 @@ class Variable:
 variable_uno = Variable(5)
 print("Entre")
 # Paso 1
-variable_uno.valor -= 3 # 2
+variable_uno.valor -= 3 
 print("Calcule")
 print(variable_uno.valor) # -2
 print()
@@ -36,3 +36,7 @@ print("Paso 3")
 variable_uno.valor += 3
 print("Calcule")
 print(variable_uno.valor)
+
+
+
+
