@@ -14,5 +14,10 @@ if __name__ == '__main__':
     ventana_1.show()
 
     # COMPLETAR
-
+    ventana_1.senal_abrir_ventana.connect(ventana_2.abrir_ventana)
+    ventana_1.senal_abrir_ventana.connect(ventana_3.abrir_ventana)
+    ventana_2.senal_abrir_castillo.connect(ventana_1.abrir_nuevamente)
+    ventana_3.senal_abrir_castillo.connect(ventana_1.abrir_nuevamente)
+    logica.senal_dormir.connect(ventana_2.dormir)
+    
     sys.exit(app.exec())

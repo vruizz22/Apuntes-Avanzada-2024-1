@@ -11,4 +11,9 @@ class Logica(QObject):
 
     def revisar_hora(self, hora):
         # COMPLETAR
-        pass
+        # hora esta en el formato "HH:MM"
+        if hora.split(":")[0] not in range(0,25) or hora.split(":")[1] not in range(0,61):
+            print("Hora no válida")
+        elif hora.split(":")[0] not in range(6, 21):
+            self.senal_dormir.emit()
+        

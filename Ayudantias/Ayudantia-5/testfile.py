@@ -9,6 +9,8 @@ from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
 # Pega aquí la definición de las clases
 
 
+
+
 if __name__ == '__main__':
     def hook(type, value, traceback):
         print(type)
@@ -18,5 +20,6 @@ if __name__ == '__main__':
     app = QApplication([])
 
     # Instanciar clases/Conectar señales
+
 
     sys.exit(app.exec())

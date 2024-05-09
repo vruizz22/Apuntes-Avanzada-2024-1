@@ -25,16 +25,26 @@ class Castillo(QWidget):
         label_imagen.setFixedSize(500, 500)
 
         # Creamos los botones (COMPLETAR)
+        boton_dormitorio = QPushButton("Dormitorio", self)
+        boton_bano = QPushButton("Baño", self)
+        boton_salir = QPushButton("Salir", self)
+        
 
         # Conectamos las señales (COMPLETAR)
+        boton_dormitorio.clicked.connect(self.metodo_abrir_dormitorio)
+        boton_bano.clicked.connect(self.metodo_abrir_bano)
+        boton_salir.clicked.connect(self.close)
 
         # Creamos el layout y añadimos los widgets
         layout_vertical = QVBoxLayout()
         layout_vertical.addStretch(1)
+        layout_vertical.addWidget(label_imagen)
+        layout_vertical.addWidget(boton_dormitorio)
+        layout_vertical.addWidget(boton_bano)
+        layout_vertical.addWidget(boton_salir)
+        layout_vertical.addStretch(1)
 
         # COMPLETAR
-
-        layout_vertical.addStretch(1)
         self.setLayout(layout_vertical)
 
     # En el caso que se clickee el boton Dormitorio
@@ -50,3 +60,4 @@ class Castillo(QWidget):
     # Para cuando se necesite abrir nuevamente
     def abrir_nuevamente(self):
         self.show()
+        
