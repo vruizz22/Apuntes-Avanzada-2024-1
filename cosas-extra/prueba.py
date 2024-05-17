@@ -1,3 +1,4 @@
+from functools import reduce
 '''
 import collections
 
@@ -28,7 +29,7 @@ dinero = banco.dinero
 print(banco.historial)
 
 '''
-
+'''
 cantidad = 10
 print("*** Menú de inicio ***")
 print()
@@ -44,3 +45,11 @@ print(f"[6] Ítem Lanza {cantidad:^19d}")
 print(f"[7] Ítem Cura {cantidad:^20d}")
 print()
 print("[0] Volver al Menú de inicio")
+'''
+
+lista = [1, 15, 20, 45, 80, 80, 0, 30, 10, 20]
+generador_lista = reduce(
+    lambda valor1, valor2: valor1 if valor1 >= valor2 else valor2,
+    lista
+)
+print(generador_lista)
