@@ -1,0 +1,37 @@
+\label{sec:flujo}
+
+En este juego, asumirás el rol de un jardinero que administra un árbol guerrero y debe tomar decisiones estratégicas para fortalecerlo y derrotar al árbol del jardinero enemigo. Al comenzar, deberás elegir la dificultad del juego, la cual debes entregar como un \textbf{argumento} por la terminal. Luego, deberás seleccionar tu árbol base, el cual podrás mejorar adquiriendo ítems\claudio{incluir referencia a la seccion de la entidad Item} en la tienda. Para ello, contarás con una cantidad \texttt{DINERO\_INICIAL}\claudio{revisa c\'omo usar par\'ametros. En la secci\'on TODO hay un ejemplo}\footnote{A lo largo del enunciado encontrarás varias palabras escritas en \texttt{ESTE\_FORMATO}\claudio{Lo mismo, formato de par\'ametro}. Estas palabras corresponden a parámetros y puedes encontrar los detalles sobre ellos en la sección \texttt{parametros.py}\claudio{Incluir referencia cruzada}.}, que aumentará al \textbf{pasar ronda}\claudio{Vamos a cambiar "transcurrir tiempo" por "pasar ronda"}. 
+
+\claudio{Esto va antes de todo lo que se dijo, mejor dejarlo al inicio para que el flujo quede tal cual se espera al ejecutar el programa}
+
+La interacción con el programa se realiza únicamente a través de la terminal\paca{terminal?}, mediante un sistema de menús anidados. \paca{'Primero' viene iniciar el programa en la terminal, seria precisa en 'En el primer Menu'} Al iniciar el programa desde la terminal, accederás al primer menú: \textbf{Selección de árbol} , donde deberás elegir un árbol entre los disponibles. Luego, ingresarás al menú de Inicio\claudio{Incluir referencia}, desde donde podrás administrar tu partida con diferentes opciones; 
+
+la \textbf{Tienda}\claudio{referencia}  donde podrás comprar \textbf{Ítems} \claudio{referencia}como  pájaros, frutas y flores, que modificarán los atributos de tu árbol.
+
+\paca{Aqui me confundo entre acciones y acciones de menú, creo que el flujo tiene que ser bien general y entenderse bien como para armar un diagrama, y en cada sección explicar el detalle.} 
+
+Al \textbf{Atacar}, se iniciará una ronda de combate en la que tu árbol infligirá daño al árbol enemigo y recibirá daño. Tras cada enfrentamiento, 
+si ninguno de los dos árboles ha sido derrotado, volverás al \textbf{Menú de Inicio} para continuar la partida. Si la rama principal de tu árbol es destruida, perderás la partida; en ese caso, se deberá mostrar un mensaje indicando tu derrota. Por otro lado, si logras destruir la rama principal \Maira{aquí quiero poner un pie de página para dar un poco de contexto con lo de la rama} del árbol enemigo, se imprimirá un mensaje de victoria. En ambos casos, la partida concluirá y el programa se cerrará automáticamente.
+
+\claudio{Vamos a hacer que se muestre un mensaje final y se cierre el juego}
+
+Con la opción \textbf{Mostrar información}, podrás ver el estado actual de tu árbol, incluyendo sus ramas vivas y los ítems. También podrás acceder a un resumen de estadísticas que mostrará tu estado actual en la partida. Además, puedes \textbf{Salir}, para terminar la partida.
+
+
+
+\Maira{Intenté otra redacción de el flujo para que sea mas secuencial , intente recolectar sus comentarios para hacerlo, ¿esta bien como, el largo? o debe ser aún más general?}
+
+\Maira{quiero hacer las referencias pero algunas secciones no me aparecen como referenciables}
+
+
+\textbf{Propuesta flujo 2.0}
+
+En este juego, asumirás el rol de un jardinero que administra un árbol guerrero y debe tomar decisiones estratégicas para fortalecerlo y derrotar al árbol del jardinero enemigo. Al comenzar, seleccionarás la dificultad del juego, la cual se proporciona como un \textbf{argumento} desde la terminal. La interacción con el programa se realiza exclusivamente a través de la terminal, mediante un sistema de menús anidados.
+
+Una vez establecida la dificultad, ingresarás al primer menú: \nameref{subsec:Selección de árbol}, donde deberás elegir entre los árboles disponibles. Cada \textbf{árbol} está compuesto por \textbf{ramas} que poseen atributos relacionados a la  vida, la resistencia y ataque. Además, las ramas pueden ser equipadas con ítems, que modifican sus estadísticas o les otorgan efectos especiales.
+
+Después de elegir tu árbol, ingresarás al \nameref{subsec:Menú principal}, donde podrás administrar la partida mediante las siguientes opciones: \textbf{Tienda}, \textbf{Atacar}, \textbf{Imprimir árbol}, \textbf{Pasar el tiempo} y \textbf{Salir}. Comenzarás con una cantidad inicial de dinero \const{DINERO\_INICIAL}\footnote{A lo largo del enunciado encontrarás varias palabras escritas en \const{ESTE\_FORMATO}. Estas palabras corresponden a parámetros y puedes encontrar los detalles sobre ellos en la sección \texttt{parametros.py}}, que podrás utilizar para comprar ítems en la  \nameref{subsec:Tienda}. La tienda es el único lugar donde puedes adquirir ítems de forma voluntaria.
+
+El juego se desarrolla en rondas, y en cada una podrás atacar o pasar la ronda. Si decides pasar ronda, recibirás una \const{GANANCIA\_PASIVA}, que incrementará tu dinero, se activarán los efectos de ramas e ítems que dependan del tiempo y, además, existirá una \const{PROB\_ITEM} de obtener un ítem de baja calidad en alguna de tus ramas, así como una \const{PROB\_ITEM\_MALICIOSO} de que aparezca un ítem perjudicial.
+
+Si decides \textbf{atacar}, se iniciará una \textbf{ronda de ataque} entre los árboles. Tras cada enfrentamiento, si ambos árboles sobreviven, regresarás al \nameref{subsec:Menú principal} para continuar la partida. Si la \textbf{rama principal} de tu árbol es destruida, perderás la partida y se mostrará un mensaje de derrota. Por otro lado, si logras destruir la rama principal del árbol enemigo, se mostrará un mensaje de victoria. En ambos casos, el juego finalizará automáticamente.

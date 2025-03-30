@@ -1,0 +1,153 @@
+\label{sec:menus}
+\subsection{Ejecución}
+\label{subsec:Ejecución}
+
+
+Tu programa deberá ejecutarse a través de un archivo llamado \mil{main.py}, el cual debe aceptar argumentos por línea de comandos para indicar la dificultad del juego. El formato de la ejecución es 
+
+Para manejar argumentos desde la línea de comandos, puedes investigar sobre \mil{sys.argv} en internet.
+
+Es importante considerar que los menús sean a prueba de cualquier tipo de error. Esto significa que, si se ingresa una opción inválida, el programa debe informar sobre el error y volver a mostrar las opciones del menú hasta que se ingrese una opción válida.
+
+El programa debe contener 3 menús: Selección inicial, Menú Principal y Tienda y las interacciones entre ellos serán explicadas a continuación. Además, todos los menús deben incluir una manera de ir al Menú principal. \textbf{Puedes definir el diseño estético de los menús}, pero estos deben cumplir todos los requisitos mínimos establecidos.
+
+
+\paca{Antes de esto, explicar: 'Tu programa debe contener 3 menús: Menu de Inicio,  Menu Principal y Menú de Tienda. Las interacciones entre ellos serán explicados a continuación.'} 
+
+
+\subsection{Selección de árbol}
+\label{subsec:Selección de árbol}
+\paca{Aclarar que sólo se puede elegir 1 árbol a la vez.}
+
+Al ejecutar tu programa, se mostrará en consola el menú de inicio del juego, donde el usuario podrá seleccionar entre las siguientes opciones:
+
+\textbf{Opciones del Selección de árbol}
+    
+\begin{itemize}
+
+    \item Selección de árboles disponibles: Se mostrarán todas las opciones de árboles cargados desde archivos, según la dificultad seleccionada. Por ejemplo, si el archivo contiene los árboles; \textbf{Roble Fortachón}, \textbf{Secuoya Rascacielos} y \textbf{ Espino Espinoso}, el menú deberá mostrar cada árbol junto con su cantidad de ramas. Una vez seleccionado un árbol, se imprimirá un mensaje de confirmación. 
+
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    
+    \begin{verbatim}
+                        -----------------------------
+                            SELECCIÓN INICIAL
+                        -----------------------------
+                        
+                        [1] Roble Fortachón : 8 Ramas
+                    
+                        [2] Secuoya Rascacielos : 12 Ramas
+                    
+                        [3] Espino Espinoso : 5 Ramas
+                    
+                    Indique su opción: 
+    \end{verbatim}
+    \caption{Ejemplo de selección de árbol}
+    \label{fig:enter-label}
+\end{figure}
+
+\Maira{¿incluyo ejemplos de los mensajes de confirmación y esas cosas? o no? :O}
+\begin{figure}[H]
+    \centering  
+    \begin{verbatim}
+    ** Has seleccionado a Secuoya Rascacielos. ¡Buena elección! **      
+    \end{verbatim}
+    \caption{Ejemplo de mensaje de confirmación para la elección de Secuoya Rascacielos}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\textbf{Consideraciones} 
+
+\begin{enumerate}
+    \item El menú solo debe mostrar las opciones de árboles que estén disponibles en los archivos cargados.
+    \item No será posible acceder al menú principal sin haber seleccionado previamente un árbol, además no será posible seleccionar más de un árbol.
+    \item Una vez seleccionado un árbol, se deberá redirigir automáticamente al menú principal, y no será posible regresar a la selección del árbol.
+\end{enumerate}
+ 
+
+
+
+
+\paca{hay que darle una repasada a esta redacción después}
+
+\subsection{Menú principal}
+\label{subsec:Menú principal}
+
+Tras seleccionar el árbol, se accederá automáticamente al menú principal, el cual incluye las siguientes opciones 
+
+\paca{Asumo que no se puede llegar a este menú si no has elegido un árbol primero.}
+
+\textbf{Opciones del Menú Principal}
+
+\paca{Menu de Inicio y Menu Principal siento que se parecen un poco en nombre... pero es sólo maña mía}
+
+\Maira{si puede ser confuso, ¿Selección de árbol será mejor?} 
+
+\claudio{La solución es entender a la selección inicial no como un menu propiamente tal. Porque el jugador nunca vuelve a esa sección, una vez iniciado el juego no puede ``re-elegir'' arbol. Es una sección previa al menú principal. Ponle de nombre ``Seleccion inicial'', como un paso previo antes de llegar al verdadero menu.}
+
+\paca{Hay que poner una referencia de como es todo el menú, y de ahi explicar los componentes. Como en las otras tareas, pueden sacar ideas, donde estén todas las opciones ordenadas y dsps las explican una a una.}
+
+\begin{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    
+    \begin{verbatim}
+                        -----------------------------
+                               MENÚ PRINCIPAL
+                        -----------------------------
+                        Dinero disponible: 2$
+                        Ronda Actual: 1
+ 
+                        [1] Mostrar información del árbol
+                    
+                        [2] Comprar ítem
+                    
+                        [3] Pasar ronda
+
+                        [4] Comenzar combate
+
+                        [5] Salir del juego
+                    
+                    Indique su opción: 
+    \end{verbatim}
+    \caption{Ejemplo del Menú principal}
+    \label{fig:enter-label}
+\end{figure}
+
+    \item Al seleccionar la opción \textbf{Comenzar combate}, se iniciará una batalla entre el árbol del usuario y el árbol enemigo. Las reglas y mecánicas específicas del combate están detalladas en la sección Combate     
+    
+    \item Al seleccionar la opción \textbf{Comprar ítem}, se desplegará un sub-menú que permite adquirir diferentes ítems para mejorar las ramas de tu árbol. este menú se describe en la sección  Menú Ítems 
+    
+    \item Al seleccionar la opción \textbf{Pasar ronda} se inicia una ronda dentro del juego sin combate y se activan diferentes efectos. En primer lugar, la  GANANCIA PASIVA, que debe sumarse al dinero actual. Además, se aplican los efectos de ramas e ítems que dependen del tiempo. También existe la posibilidad de que aparezcan ítems de baja calidad en el inventario o ítems maliciosos. 
+     
+    \Maira{describo el tema de  aparición aleatoria de ítems y el parámetro sobre eso aquí o se hace en entidades?} 
+    
+    \claudio{Todas esas mec\'anicas deben ir en el flujo/mec\'anicas del juego, en la secci\'on entidades va solo el desglose de los tipos que existen}
+    
+    \Maira{lo puse en la propuesta flujo 2.0 en el parrafo 4 está bien ponerlo ahí? aquí no menciono nada de esos parámetros?}     
+    
+    \item Al seleccionar la opción \textbf{Mostrar información del árbol}
+     el programa debe preguntarle al usuario si quiere obtener la información completa el árbol , o un resumen. la \textbf{Información completa del árbol} debe mostrar una descripción del árbol, que incluya sus ramas, las estadísticas individuales de cada una y los ítems equipados en estas. la opción Resumen …
+    
+    \item Al seleccionar la opción \textbf{Salir del juego} se imprimirá un mensaje de despedida y se cerrará el programa. Un ejemplo de mensaje podría ser: 
+
+    
+\end{itemize}
+
+
+\subsection{Tienda}
+\label{subsec:Tienda}
+
+Se mostrarán todas las opciones de ítems cargadas desde el archivo (). Por ejemplo, si el archivo contiene los ítems: {Item1, Item2, Item3}, el menú deberá desplegar todos estos ítems junto a sus atributos de mejoras para la rama correspondiente. Una vez seleccionado un ítem, se imprimirá un mensaje de confirmación. Un ejemplo de mensaje podría ser:
+
+Si se selecciona la opción \textbf{Volver al menú principal}, el programa regresará al menú principal con el árbol equipado con los nuevos ítems adquiridos.
+
+Consideraciones: 
+
+Al escoger un ítem, este no desaparecerá del catálogo, por lo que podrá ser seleccionado nuevamente siempre que el usuario tenga suficiente dinero. El ítem podrá ser adquirido tantas veces se desee.  

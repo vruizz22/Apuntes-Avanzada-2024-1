@@ -1,0 +1,83 @@
+\documentclass{iic2233homework}
+
+% Código hermoso que hace que en minted ya no existan las cajas rojas <3
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+\hypersetup{
+    pdffitwindow=true,  % window fit to page when opened no
+    colorlinks=true,    % false: boxed links; true: colored links
+    linkcolor=purple,   % color of internal links (change box color with linkbordercolor)
+    urlcolor=magenta,   % color of external links
+}
+
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+
+%----------------------------------------------------------------------
+
+%% Información de la tarea
+\homeworknumber{2}
+\year{2025}
+\semester{1}
+
+%% Comandos para poner el nombre u otras cosas una sola vez
+\newcommand{\programa}{\textit{DCConquista de Yggdrasil}\xspace}
+\newcommand{\prota}{{\textbf{POR DEFINIR}}\xspace}
+\newcommand{\badguy}{{\textbf{POR DEFINIR}}\xspace}
+\newcommand{\gatos}{{\textbf{POR DEFINIR}}\xspace}
+
+%% o definir palabras que siempre tienen discordancias
+\newcommand{\clic}{\textit{click}\xspace}
+\newcommand{\click}{\clic}
+\newcommand{\clics}{\textit{click}\xspace}
+\newcommand{\clicks}{\clics}
+
+%----------------------------------------------------------------------
+
+\begin{document}
+
+% Imperativo: ocultar la sección to-do antes de liberar la tarea
+\section*{TO-DO}
+\input{sections/00_todo}
+
+\section{Resumen ejecutivo}
+\input{sections/01_resumen}
+
+\section{\programa}
+\input{sections/02_lore}
+
+\section{Flujo del programa}
+\input{sections/03_flujo}
+
+\section{Menús}
+\input{sections/04_menus}
+
+\section{Entidades}
+\input{sections/05_entidades}
+
+\section{Combates}
+\input{sections/06_combates}
+
+\section{Archivos}
+\input{sections/07_archivos}
+%----------------------------------------------------------------------
+
+% Acá pueden ingresar las otras secciones y sub secciones del programa
+
+%----------------------------------------------------------------------
+
+\section{\texttt{.gitignore}}
+\input{sections/08_gitignore}
+
+\section{\textbf{Importante:} Corrección de la tarea}
+\input{sections/09_importante}
+
+\end{document}

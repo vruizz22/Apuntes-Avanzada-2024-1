@@ -1,0 +1,30 @@
+\label{sec:combates}
+
+Como el objetivo del juego es derrotar al \textbf{Árbol Enemigo}, el combate es una de las partes centrales del programa. Para cada ataque, el \textbf{jugador} debe tomar la mejor decisión para atacar a su rival para poder destruir su \textbf{rama principal}. Al momento de combatir el \textbf{jugador} debe elegir desde que rama atacar, esto ya que el daño realizado se calcula en base a la suma total del ataque de cada rama con sus subramas, dividido por la cantidad de estas utilizadas. \Luc{aca no sabia si poner un diagrama igual de ejemplo, para que se entienda mejor}. \claudio{full si, diagrama ayuda a entender mucho mejor}
+
+El ataque siempre será recibido por la rama más alta, es decir, la que tenga el mayor nivel de profundidad dentro del \textbf{Árbol}. En caso de tener 2 o mas subramas al mismo nivel de profundidad, se debe calcular de forma aleatoria cual recibe el ataque. 
+
+Para recibir daño, primero se debera calcular cuanto sera el daño a recibir, para luego restarlo a la vida.  \Luc{no sabia si ponerle altiro vida - (daño) o que se asuma la formula es solo pal daño y luego deben restarla a la vida ¿?,} \claudio{mejor ponlo separado, «asi se calcula el ataque», eso es como "fase 1", y despues «asi se -aplica- el daño», que seria fase 2. Dividirlo en dos fases facilita entender que hay efectos que aplican a solo una de las dos} \Luc{cambiado}
+Para recibir daño:
+\[
+\text{daño\_a\_recibir} = \operatorname{round} \left( \text{ataque\_enemigo} \times (1 - \text{defensa\_rama}) \right)
+\]
+
+\[
+\text{vida} = (vida - \text{daño\_a\_recibir})
+\]
+
+Para realizar daño al enemigo:
+
+\[
+\text{daño\_a\_realizar} = \operatorname{round} \left( \text{ataque\_propio} \times (1 - \text{defensa\_rama\_enemiga}) \right)
+\]
+
+\[
+\text{vida\_rama\_enemigo} = (\text{vida\_rama\_enemigo} - \text{daño\_a\_realizar})
+\]
+
+En caso de que el daño recibido por una rama sea mayor a su salud, el daño sobrante debe ser pasado a la siguiente rama, donde se debe recalcular el daño recibido por la nueva rama en base a la fórmula. Ademas, si una rama es destruida, todas sus subramas tambien se verán destruidas.
+\Luc{nota personal: añadir diagrama}
+
+Por último, el enemigo ataca al azar, es decir, se debe calcular de forma aleatoria con rama el \textbf{Árbol enemigo} atacara.

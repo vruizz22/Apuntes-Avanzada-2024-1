@@ -1,0 +1,215 @@
+\label{sec:archivos}
+Para el desarrollo de \programa\ será necesaria la lectura y carga de archivos. Estos contendrán información sumamente relevante para la ejecución correcta de tu programa.
+
+\subsection{Árboles por dificultad}
+Archivos de texto \texttt{\mil{arboles_faciles.txt}}, \texttt{\mil{arboles_medios.txt}}, \texttt{\mil{arboles_dificiles.txt}} 
+ubicados en la carpeta \texttt{data/}, que definen la estructura de los arboles que el jugador y el enemigo podrán seleccionar según la dificultad seleccionada.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{python}
+{
+    Roble Guerrer;
+    Ficus;
+    {
+        Hyedrid;
+        Paalm;
+        Alovelis
+    };
+    {
+        Pine;
+        Cactoos;
+        Cactoos;
+        {
+            Alovelis;
+            Hyedrid;
+            Hyedrid
+        };
+        Celery
+    };
+    Celery
+};
+{
+    Sauce Veloz;
+    Ficus;
+    {
+        Hyedrid;
+        Paalm;
+        Alovelis
+    }
+}
+        \end{python}
+        \caption{Ejemplo de archivo \mil{arboles_faciles.txt}}
+        \label{fig:facil}
+    \end{minipage}
+\end{figure}
+
+
+Un cuadro que explica mejor la estructura de los árboles, con sus respectivas ramas, es el siguiente:
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{verbatim}
+    Roble Guerrer
+    +-- Ficus
+    +-- Hyedrid
+    |   +-- Paalm
+    |   \-- Alovelis
+    +-- Pine
+    |   +-- Cactoos
+    |   +-- Cactoos
+    |   +-- Alovelis
+    |   |   +-- Hyedrid
+    |   |   \-- Hyedrid
+    |   \-- Celery
+    \-- Celery
+    
+    Sauce Veloz
+    +-- Ficus
+    \-- Hyedrid
+        +-- Paalm
+        \-- Alovelis
+        \end{verbatim}
+        \caption{Estructura de los árboles del archivo \mil{arboles_faciles.txt}}
+        \label{fig:ramas}
+    \end{minipage}
+\end{figure}
+
+Cabe destacar, cada árbol tiene un nombre único que lo identifica el cual aparece en el inicio del árbol. 
+Además, la estructura de los árboles contiene el nombre de cada una de sus ramas hijas, 
+donde será tarea de ustedes realizar la carga de las respectivas ramas hijas
+con sus atributos. En la siguiente sección se detallan los atributos de cada rama.
+
+\subsection{Ramas Disponibles}
+\label{subsec:ramas}
+
+Archivo \texttt{ramas.txt} que define los tipos de ramas, con sus atributos y efectos ya mencionados en la sección \ref{subsubsec:Tipos de Ramas}.
+
+\begin{table}[H]
+\centering
+\label{tab:ramas}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} \\ \hline
+\mil{nombre_rama} & String \\ \hline
+\mil{puntos_de_vida} & Integer \\ \hline
+\mil{resistencia} & Float \\ \hline
+\mil{daño_base} & Integer \\ \hline
+\mil{item} & Item|None \\ \hline
+\mil{efecto} & Callable aplicado al atacar/defender \\ \hline
+\end{tabular}
+\caption{Especificación de ramas}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{python}
+Ficus;1600;0.85;45
+Celery;1200;0.75;35
+Hyedrid;1000;0.65;75
+Paalm;2000;0.90;40
+Alovelis;1800;0.80;25
+Pine;900;0.60;60
+Cactoos;800;0.50;55
+        \end{python}
+        \caption{Ejemplo de archivo \mil{ramas.txt}}
+        \label{fig:ramas}
+    \end{minipage}
+\end{figure}
+
+Es importante mencionar que el atributo \mil{item} puede ser \mil{None} o un ítem de la tienda. En caso de que el ítem sea \mil{None}, no se aplicará ningún efecto al atacar o defender. En caso contrario, se aplicará el efecto del ítem al atacar o defender.
+En la siguiente sección se detallan los ítems disponibles en la tienda.
+
+\subsection{Ítems de la Tienda}
+\label{subsec:items}
+
+Archivo \texttt{items.txt} que define los ítems disponibles en la tienda, donde cada uno aplicará un \texttt{buff} o \texttt{debuff} a la rama que lo posea. 
+
+\begin{table}[H]
+\centering
+\label{tab:items}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} \\ \hline
+\mil{nombre_item} & String \\ \hline
+\mil{ataque} & Fórmula aplicada (e.g. \mil{"ataque + 2"}) \\ \hline
+\mil{defensa} & Fórmula aplicada (e.g. \mil{"defensa + 2"}) \\ \hline
+\mil{vida_maxima} & Fórmula aplicada (e.g. \mil{"vida_maxima + 2"})\\ \hline
+\mil{precio} & Integer \\ \hline
+\end{tabular}
+\caption{Especificación de ítems}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{python}
+Flor;0;0;50
+Flor Dorada;0;0.05;60
+Panal de Abejas;30;0;10
+Nido de Pajaros;100;-0.1;0
+        \end{python}
+        \caption{Ejemplo de archivo \mil{items.txt}}
+        \label{fig:items}
+    \end{minipage}
+\end{figure}
+
+\subsection{Ítems malignos}
+
+Archivo \texttt{\mil{items_malignos.txt}} que define los ítem malignos (\texttt{plagas}) que pueden llegar a afectar
+a cualquiera de las ramas del árbol del jugador o del enemigo. Cuando el jugador \textbf{Transcurre el tiempo}, existe la posibilidad de que alguna de sus ramas
+o las del enemigo (según la \mil{resistencia_a_plagas} de cada rama), se vea afectada por un ítem maligno. En este caso, el ítem maligno se aplicará a la rama afectada,
+ocupando el \texttt{Slot} de ítem de la respectiva rama. En caso de que la rama ya tenga un ítem, el ítem maligno sobreescribirá el ítem existente.
+
+\begin{table}[H]
+\centering
+\label{tab:items}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} \\ \hline
+\mil{nombre_item} & String \\ \hline
+\mil{ataque} & Fórmula aplicada (e.g. \mil{"ataque + 2"}) \\ \hline
+\mil{defensa} & Fórmula aplicada (e.g. \mil{"defensa + 2"}) \\ \hline
+\mil{vida_maxima} & Fórmula aplicada (e.g. \mil{"vida_maxima + 2"})\\ \hline
+\end{tabular}
+\caption{Especificación de ítems}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{python}
+Termitas;0;-0.3;0
+Zancudos;0;0;-100
+        \end{python}
+        \caption{Ejemplo de archivo \mil{items_malignos.txt}}
+        \label{fig:items}
+    \end{minipage}
+\end{figure}
+
+Cabe destacar que los ítems malignos no tienen precio, ya que no se pueden comprar en la tienda.
+
+\subsection{parametros.py}
+Para esta tarea, se requiere la creación de un archivo \texttt{parametros.py} donde deberás \textbf{completar todos los parámetros mencionados a lo largo del enunciado}. Dichos parámetros se presentarán en \const{ESTE\_FORMATO} y en ese color. Además, es fundamental incluir cualquier valor constante necesario en tu tarea, así como cualquier tipo de \textit{path} utilizado.
+
+Un parámetro siempre tiene que estar nombrado de acuerdo a la función que cumplen, por lo tanto, asegúrate de que sean descriptivos y reconocibles. Ejemplos de parametrización:
+
+\begin{python}
+CINCO = 5  # mal parámetro
+DINERO_MAXIMO = 3000  # buen parámetro
+PROBABILIDAD_TORMENTA = 0.2  # buen parámetro
+\end{python}
+
+Si necesitas agregar algún parámetro que varíe de acuerdo a otros parámetros, una correcta parametrización sería la siguiente:
+
+\begin{python}
+PI = 3.14
+RADIO_CIRCUNFERENCIA = 3
+AREA_CIRCUNFERENCIA = PI * (RADIO_CIRCUNFERENCIA ** 2)
+\end{python}
+
+Dentro del archivo \textbf{parametros.py}, es obligatorio que hagas uso de todos los parámetros almacenados y los importes correctamente. Cualquier información no relacionada con parámetros almacenada en este archivo resultará en una penalización en tu nota. Recuerda que no se permite el \link{https://es.wikipedia.org/wiki/Codificaci\%C3\%B3n_r\%C3\%ADgida}{hard-coding}\footnote{\textit{Hard-coding} es la práctica de ingresar valores directamente en el código fuente del programa en lugar de parametrizar desde fuentes externas.}, ya que esta práctica se considera incorrecta y su uso conllevará una reducción en tu calificación.

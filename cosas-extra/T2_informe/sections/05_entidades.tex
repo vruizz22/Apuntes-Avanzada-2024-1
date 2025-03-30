@@ -1,0 +1,76 @@
+\label{sec:entidades}
+
+En esta sección se detallarán las distintas entidades que deberás implementar para modelar \programa. Para ello, tendrás que utilizar conceptos clave de la \textbf{Programación Orientada a Objetos} como \textit{herencia}, \textit{multiherencia} y \textit{clases abstractas}. Ten en cuenta que cada uno de estos conceptos debe ser incluido en la tarea \textbf{al menos una vez}, por lo que deberás descubrir dónde implementarlos \textbf{correctamente} según lo propuesto en el enunciado.
+
+Las tres entidades principales de \textit{DCConquista de Yggdrasil} son \nameref{subsec:Árbol}, \nameref{subsec:Rama} e \nameref{subsec:Ítem}. Debes incluir \textbf{como mínimo} las características nombradas a continuación, pero siéntete libre de añadir nuevos atributos y métodos si lo estimas necesario.
+
+\subsection{Árbol} \label{subsec:Árbol}
+El \mil{Árbol} es tu centro de operaciones en \textit{DCConquista de Yggdrasil}. Es a través de él que podrás comandar los Ataques desde tus ramas hacia las del \textbf{Árbol Enemigo}. Para lograr tu objetivo, tu árbol debe resistir a los ataques enemigos y destruir su rama principal, por lo que la estrategia es clave para alcanzar la victoria.
+
+A continuación se presentan las características de un árbol: \Enzo{En la sección de Archivos se definen más atributos para los árboles, pero no están en el documento de requerimientos. Los añado??}
+\begin{itemize}
+    \item \textbf{Rama Principal}: Contiene la rama principal (tronco) de tu árbol.
+    \item \textbf{Dinero}: Contiene el total en int de dinero que puedes usar en el Menú Tienda. \claudio{Ojo aquí, el dinero no debería ser un atributo del árbol. Es más bien de la «partida de juego»} \Enzo{Especifico que no es dinero del árbol pero que lo almacena? o lo quito? Si lo quito cómo se manejaría el dinero?}
+    \item \textbf{Nombre}: Contiene el nombre de tu árbol.
+\end{itemize}
+Además, debe poder realizar las siguientes acciones:
+\begin{itemize}
+    \item \textbf{Cargar Rama}: \Enzo{Al final, como los árboles no pueden crecer, Árbol no tendrá este método no?} \claudio{En efecto no es obligatorio, pero quizás mencionarlo después de este listado como un "oye quizas te parezca buena idea tener un metodo que se encargue de meter ramas" para cuando les toque construir el \'arbol a partir de los archivos} \paca{Me complica cómo se evaluaría algo así de libre elección}\claudio{En ese caso, para no dejarlo tan ``libre'' podemos pedirles que, en alguna parte, creen un m\'etodo \mil{cargar_arbol} que se encargue de construir la entidad \'arbol a partir de la informaci\'on del archivo. ya luego ah\'i tienen la libertad de si quieren hacerlo recursivamente, rama a rama, todo el \'arbol de una, etc... pero ese m\'etodo que se encargar de trabajar el archivo y \textit{outputear} un \'arbol debe estar}
+    \item \textbf{Cargar Ítem}: Debe buscar una de sus ramas y cargarle un \mil{Ítem}.
+    \item \textbf{Atacar}: Recibe una \mil{rama} del árbol rival, y le aplica los puntos de daño calculados del árbol (la forma de obtener los puntos de daño se detalla en la sección \nameref{sec:combates}) 
+    \item \textbf{Pasar Ronda}: Tu \sout{bonsái todopoderoso} árbol debe poder actualizar su estado una vez se pase a la siguiente ronda. Esto implica que se aplicarán los efectos de todas las \mil{ramas} y sus \mil{ítems}, pero también implica la aparición aleatoria de estos en tu inventario y de \sout{plagas} ítems maliciosos en el \mil{Árbol}.
+    \item \textbf{Resumir Árbol}: Tu árbol también debe poder mostrar el estado de cada una de sus ramas. Para esto se debe sobrescribir el método \mil{__str__} de la clase y hacer uso de las presentaciones de las ramas. \Enzo{Podría especificar que este resumen del árbol debe representar su estructura, y dar un ejemplo de cómo podría ser ¿?} \claudio{Acuérdate que hay dos métodos. Este resumen solo muestra la informacion estadistica de todo el arbol, tipo, cuantas ramas tiene, cuanto es el ataque total , la vida total, etc. SIn mostrar cómo es realmente el arbol. Luego debe haber \textbf{otro} método (segun yo este otro metodo debe ser el que sobrescriba str y repr), y en ese otro metodo debe mostrar realmente todo el arbol, imprimirlo de una forma bonita mostrando todas las ramas} \Enzo{Ok!! Cambiar este para que sea un resumen más estadístico del árbol, y especificaré el otro}
+\end{itemize}
+
+\subsection{Rama} \label{subsec:Rama}
+
+Las \mil{ramas} son la unidad principal de tu árbol en \textit{DCConquista de Yggdrasil}, quienes darán todo de sí por mantenerlo en pie para así vencer al malvado \textbf{Árbol Enemigo}.
+
+Las \mil{ramas} poseen diversas estadísticas que dictaminan qué tan poderosos serán los ataques de tu \mil{árbol} y cómo este resistirá a las arremetidas de su rival. A continuación, se presentarán las diferentes características de las ramas:
+
+\begin{itemize}
+    \item \textbf{Nombre}: Contiene el nombre de la rama.
+    \item \textbf{Salud Máxima}: Corresponde a un entero positivo que representa cantidad máxima de puntos de vida que puede tener la rama. \Enzo{No definí un rango de valores. Viendo la sección de archivos de las ramas, estas no tienen un rango de vida}
+    \item \textbf{Salud}: Corresponde a un int entre \const{0} y \const{SALUD\_MÁXIMA} que representa la cantidad de vida actual de la rama.
+    \item \textbf{Daño Base}: Corresponde a un int entre \const{10} y \const{50} que representa la cantidad de puntos de daño que inflinge la rama.
+    \item \textbf{Defensa}: Corresponde a un float entre \const{-0.5} y \const{0.5} que representa la resistencia de la rama al ser atacada.\Enzo{Cambiado !}
+    \item \textbf{Ítem}: Si lo hay, corresponde al objeto de la clase \const{Ítem} equipado en la rama.
+    \item \textbf{Subramas}: Corresponde a todas las ramas que derivan de la rama actual. Esto incluye tanto a sus ramas hijas como las que surgen de ellas.
+\end{itemize}
+Además, las ramas pueden realizar diferentes acciones, en las que pueden aplicarse efectos según su \textbf{tipo} (Ver sección \nameref{subsubsec:Tipos de Ramas}). Estas acciones se detallan a continuación:
+\begin{itemize}
+    \item \textbf{Agregar Subrama}: Recibe un objeto \mil{rama} que agregará a sus subramas.
+    \item \textbf{Cargar Ítem}: Permite a la rama equiparse un objeto \mil{ítem}, y que apliquen así sus efectos sobre ella.
+    \item \textbf{Retirar Ítem}: Permite a la rama descartar el \mil{ítem} que tenía equipado, perdiendo sus efectos.
+    \item \textbf{Pasar Ronda}: Actualiza el estado de la rama al pasar de ronda, ejerciéndose los efectos que apliquen sobre ella.
+    \item \textbf{Atacar}: Retorna los puntos de daño que ejerce la rama. Esto incluye la influencia que pueda tener el efecto de la rama en su daño.
+    \item \textbf{Recibir Ataque}: Recibe los puntos de daño ejercidos por el \textbf{Árbol Enemigo}, que son aplicados a la \const{SALUD} de la rama en función de su defensa y los posibles efectos que esta tenga.
+\end{itemize}
+\subsubsection{Tipos de Ramas} \label{subsubsec:Tipos de Ramas}
+Existen distintos tipos de \mil{ramas}, cada uno con un efecto especial a la hora de combatir en la \textit{DCConquista de Yggdrasil}. 
+
+Estos efectos difieren en cuándo son aplicados y cómo influyen en las estadísticas de la rama y las de sus demás compañeras. Los tipos de ramas y sus efectos se detallan a continuación:
+
+\begin{table}[H]
+\centering
+\label{tab:ramas}
+\begin{tabularx}{1\textwidth}{|l|X|}
+\hline
+\textbf{Rama} & \textbf{Efecto}                                                                                      \\ \hline
+Ficus         & Cada vez que transcurre una ronda, esta rama y sus hijas recuperan 10\% de la vida faltante.         \\ \hline
+Celery        & Por cada ronda que esta rama no ataque ni forme parte de un ataque, gana 1\% de daño.                \\ \hline
+Hyedrid       & En cada ronda en que esta rama no tenga un ítem equipado, su ataque es un 5\% mayor.                 \\ \hline
+Paalm         & Cada vez que esta rama recibe un ataque, su defensa aumenta en 0.02                                  \\ \hline
+Alovelis      & Por cada ronda en que esta rama no reciba daño, regenera el 5\% de la salud de todas sus ramas hijas \\ \hline
+Pine          & En cada ronda, si tiene un ítem equipado, su defensa aumenta 0.03; de lo contrario, aumenta 0.01.    \\ \hline
+Cactoos       & Cada vez que esta rama recibe un ataque, gana 1\% de daño                                            \\ \hline
+\end{tabularx}
+\caption{Tipos de ramas y sus efectos.}
+\end{table}
+
+\subsection{Ítem} \label{subsec:Ítem}
+
+Los ítems en \textit{DCConquista de Yggdrasil} juegan un papel fundamental para potenciar las ramas de tu árbol y asegurar la victoria. Estos podrán ser adquiridos a través de la \nameref{subsec:Tienda} a cambio de dinero, y sirven para fortalecer las estadísticas de las ramas en el combate.
+
+
+\subsubsection{Tipos de Ítems} \label{subsubsec:Tipos de Ítems}
